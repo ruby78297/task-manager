@@ -6,7 +6,14 @@ import {
   setUser,
   logoutUser,
 } from '../Redux/features/authSlice';
-import { Button, Container, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid2,
+  Typography,
+} from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,30 +34,94 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Typography variant='h4'>Task Manager</Typography>
-      {user ? (
-        <>
-          <Typography variant='h6'>
-            Welcome, {user.displayName}
-          </Typography>
-          <Button
-            variant='contained'
-            color='secondary'
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </>
-      ) : (
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={handleLogin}
+    <Container
+      maxWidth='false'
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        background: '#f5f5f5',
+      }}
+    >
+      <Grid container sx={{ height: '100%' }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            padding: '20px',
+          }}
         >
-          Sign in with Google
-        </Button>
-      )}
+          <Box>
+            <Typography variant='h4'>Task Manager</Typography>
+            {user ? (
+              <>
+                <Typography variant='h6'>
+                  Welcome, {user.displayName}
+                </Typography>
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  onClick={handleLogout}
+                  sx={{ marginTop: '10px' }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleLogin}
+              >
+                Sign in with Google
+              </Button>
+            )}
+          </Box>
+        </Grid>
+        {/* Top Image overlay */}
+        <Grid xs={12} sm={6}>
+          <Grid container>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '50%',
+                height: '50%', // Top half of the screen
+                backgroundImage: 'url(/loginImg/circles_bg.png)', // First image
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 1, // Ensure it's in the background
+              }}
+            ></Grid>
+
+            {/* Bottom Image overlay */}
+            <Grid
+              item
+              xs={12}
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '50%',
+                height: '50%', // Bottom half of the screen
+                backgroundImage: 'url(/loginImg/loginImg.png)', // Second image
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 1, // Ensure it's in the background
+              }}
+            ></Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Container>
   );
 };
