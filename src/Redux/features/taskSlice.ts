@@ -1,22 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Task } from '../../types'; // Import the shared Task type
 
 const initialState = {
-  tasks: [],
+  tasks: [] as Task[], // Use Task[] type here
 };
 
 const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTask: (state, action) => {
+    addTask: (state, action: PayloadAction<Task>) => {
       state.tasks.push(action.payload);
     },
-    deleteTask: (state, action) => {
+    deleteTask: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks.filter(
         (task) => task.id !== action.payload
       );
     },
-    updateTask: (state, action) => {
+    updateTask: (state, action: PayloadAction<Task>) => {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       );

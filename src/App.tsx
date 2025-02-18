@@ -9,7 +9,7 @@ import Dashboard from './pages/Dashboard';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Provider store={store}>
       <Router>
